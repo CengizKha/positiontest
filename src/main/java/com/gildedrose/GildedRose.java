@@ -11,56 +11,31 @@ class GildedRose {
     public void updateQuality() {
         for (RoseItem item : items) {
 
-
-            if (!item.getName().equals(RoseItem.AGED_BRANDIE)
-                    && !item.getName().contains(RoseItem.BACKSTAGE_PASSES)) {
-                if (item.getQuality() > 0) {
-                    if (!item.getName().contains(RoseItem.SULFURA)) {
-                        item.quality = item.quality - 1;
-                    }
+            if(item.getName().contains(item.BACKSTAGE_PASSES)){
+                if(item.getSellIn() <= 3){
+                    item.setQuality(item.getQuality() +3);
+                } else if(item.getSellIn() <= 10){
+                    item.setQuality(item.getQuality() +2);
+                } else if(item.getSellIn() == 0){
+                    item.setQuality(0);
+                } else {
+                    item.setQuality(item.getQuality() +1);
+                }
+            } else if(item.getName().contains(item.AGED_BRANDIE) && item.getSellIn() >= 0) {
+                if(item.getSellIn() >= 0){
+                    item.setQuality(item.getQuality() +1);
+                } else {
+                    item.setQuality(item.getQuality() /2);
                 }
             } else {
-                if (item.getQuality() < 50) {
-                    item.quality = item.quality + 1;
-
-                    if (item.getName().contains(RoseItem.BACKSTAGE_PASSES)) {
-                        if (item.getSellIn() < 11) {
-                            if (item.getQuality() < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-
-                        if (item.getSellIn() < 6) {
-                            if (item.getQuality() < 50) {
-                                item.quality = item.quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (item.getSellIn() < 0) {
-                if (!item.getName().equals(RoseItem.AGED_BRANDIE)) {
-                    if (!item.getName().contains(RoseItem.BACKSTAGE_PASSES)) {
-                        if (item.getQuality() > 0) {
-                            if (!item.getName().contains(RoseItem.SULFURA)) {
-                                item.quality = item.quality - 1;
-                            }
-                        }
-                    } else {
-                        item.quality = item.quality - item.quality;
-                    }
+                if(item.getSellIn() == 0){
+                    item.setQuality(item.getQuality() /2);
                 } else {
-                    if (item.getQuality() < 50) {
-                        item.quality = item.quality + 1;
-                    }
+                    item.setQuality(item.getQuality() -1);
                 }
             }
 
-
-            if(!item.getName().contains(RoseItem.SULFURA)){
-                item.decreaseSellin();
-            }
+            item.sellingPeriode();
         }
     }
 }
