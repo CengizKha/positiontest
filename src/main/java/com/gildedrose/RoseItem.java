@@ -1,6 +1,11 @@
 package com.gildedrose;
 
 public class RoseItem extends Item {
+
+    public static String SULFURA = "Sulfuras";
+    public static String AGED_BRANDIE = "Aged Brie";
+    public static String BACKSTAGE_PASSES = "Backstage passes";
+
     public RoseItem(String name, int sellIn, int quality){
         super(name, sellIn, quality);
     }
@@ -29,7 +34,7 @@ public class RoseItem extends Item {
         return this.quality;
     }
     public void setQuality(int quality){
-        if(quality >= 0){
+        if(quality >= 0 && !this.getName().contains(SULFURA)){
             this.quality = quality;
         }
     }

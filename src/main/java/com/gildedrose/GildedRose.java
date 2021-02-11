@@ -1,9 +1,6 @@
 package com.gildedrose;
 
 class GildedRose {
-    private static String SULFURA = "Sulfuras";
-    private static String AGED_BRANDIE = "Aged Brie";
-    private static String BACKSTAGE_PASSES = "Backstage passes";
 
     protected RoseItem[] items;
 
@@ -15,10 +12,10 @@ class GildedRose {
         for (RoseItem item : items) {
 
 
-            if (!item.getName().equals(AGED_BRANDIE)
-                    && !item.getName().contains(BACKSTAGE_PASSES)) {
+            if (!item.getName().equals(RoseItem.AGED_BRANDIE)
+                    && !item.getName().contains(RoseItem.BACKSTAGE_PASSES)) {
                 if (item.getQuality() > 0) {
-                    if (!item.getName().contains(SULFURA)) {
+                    if (!item.getName().contains(RoseItem.SULFURA)) {
                         item.quality = item.quality - 1;
                     }
                 }
@@ -26,7 +23,7 @@ class GildedRose {
                 if (item.getQuality() < 50) {
                     item.quality = item.quality + 1;
 
-                    if (item.getName().contains(BACKSTAGE_PASSES)) {
+                    if (item.getName().contains(RoseItem.BACKSTAGE_PASSES)) {
                         if (item.getSellIn() < 11) {
                             if (item.getQuality() < 50) {
                                 item.quality = item.quality + 1;
@@ -43,10 +40,10 @@ class GildedRose {
             }
 
             if (item.getSellIn() < 0) {
-                if (!item.getName().equals(AGED_BRANDIE)) {
-                    if (!item.getName().contains(BACKSTAGE_PASSES)) {
+                if (!item.getName().equals(RoseItem.AGED_BRANDIE)) {
+                    if (!item.getName().contains(RoseItem.BACKSTAGE_PASSES)) {
                         if (item.getQuality() > 0) {
-                            if (!item.getName().contains(SULFURA)) {
+                            if (!item.getName().contains(RoseItem.SULFURA)) {
                                 item.quality = item.quality - 1;
                             }
                         }
@@ -61,7 +58,7 @@ class GildedRose {
             }
 
 
-            if(!item.getName().contains(SULFURA)){
+            if(!item.getName().contains(RoseItem.SULFURA)){
                 item.decreaseSellin();
             }
         }
