@@ -5,34 +5,36 @@ class GildedRose {
     private static String AGED_BRANDIE = "Aged Brie";
     private static String BACKSTAGE_PASSES = "Backstage passes";
 
-    protected Item[] items;
+    protected RoseItem[] items;
 
-    public GildedRose(Item[] items) {
+    public GildedRose(RoseItem[] items) {
         this.items = items;
     }
 
     public void updateQuality() {
-        for (Item item : items) {
-            if (!item.name.equals(AGED_BRANDIE)
-                    && !item.name.contains(BACKSTAGE_PASSES)) {
-                if (item.quality > 0) {
-                    if (!item.name.contains(SULFURA)) {
+        for (RoseItem item : items) {
+
+
+            if (!item.getName().equals(AGED_BRANDIE)
+                    && !item.getName().contains(BACKSTAGE_PASSES)) {
+                if (item.getQuality() > 0) {
+                    if (!item.getName().contains(SULFURA)) {
                         item.quality = item.quality - 1;
                     }
                 }
             } else {
-                if (item.quality < 50) {
+                if (item.getQuality() < 50) {
                     item.quality = item.quality + 1;
 
-                    if (item.name.contains(BACKSTAGE_PASSES)) {
-                        if (item.sellIn < 11) {
-                            if (item.quality < 50) {
+                    if (item.getName().contains(BACKSTAGE_PASSES)) {
+                        if (item.getSellIn() < 11) {
+                            if (item.getQuality() < 50) {
                                 item.quality = item.quality + 1;
                             }
                         }
 
-                        if (item.sellIn < 6) {
-                            if (item.quality < 50) {
+                        if (item.getSellIn() < 6) {
+                            if (item.getQuality() < 50) {
                                 item.quality = item.quality + 1;
                             }
                         }
@@ -40,15 +42,11 @@ class GildedRose {
                 }
             }
 
-            if (!item.name.contains(SULFURA)) {
-                item.sellIn = item.sellIn - 1;
-            }
-
-            if (item.sellIn < 0) {
-                if (!item.name.equals(AGED_BRANDIE)) {
-                    if (!item.name.contains(BACKSTAGE_PASSES)) {
-                        if (item.quality > 0) {
-                            if (!item.name.contains(SULFURA)) {
+            if (item.getSellIn() < 0) {
+                if (!item.getName().equals(AGED_BRANDIE)) {
+                    if (!item.getName().contains(BACKSTAGE_PASSES)) {
+                        if (item.getQuality() > 0) {
+                            if (!item.getName().contains(SULFURA)) {
                                 item.quality = item.quality - 1;
                             }
                         }
@@ -56,10 +54,15 @@ class GildedRose {
                         item.quality = item.quality - item.quality;
                     }
                 } else {
-                    if (item.quality < 50) {
+                    if (item.getQuality() < 50) {
                         item.quality = item.quality + 1;
                     }
                 }
+            }
+
+
+            if(!item.getName().contains(SULFURA)){
+                item.decreaseSellin();
             }
         }
     }
