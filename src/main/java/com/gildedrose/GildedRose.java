@@ -11,33 +11,46 @@ class GildedRose {
     public void updateQuality() {
         for (RoseItem item : items) {
 
+            item.decreasePeriode(1);
+
             if(item.getName().contains(item.BACKSTAGE_PASSES)){
-                if(item.getSellIn() <= 3){
-                    increaseQualityBy(item, 3);
-                } else if(item.getSellIn() <= 10){
-                    increaseQualityBy(item, 2);
-                } else if(item.getSellIn() == 0){
-                    item.setQuality(0);
-                } else {
-                    increaseQualityBy(item, 1);
-                }
+                backstageUpdate(item);
             } else if(item.getName().contains(item.AGED_BRANDIE)) {
-                if(item.getSellIn() >= 0){
-                    increaseQualityBy(item, 1);
-                } else {
-                    decreaseQualityBy(item, -2);
-                }
+                agedBendieUpadate(item);
             } else {
-                if(item.getName().contains(item.CONJURED) || item.getSellIn() <= 0){
-                    decreaseQualityBy(item, -2);
-                } else {
-                    decreaseQualityBy(item, 1);
-                }
+                othersUpdate(item);
             }
 
-            item.decreasePeriode(1);
         }
 
+    }
+
+    public void agedBendieUpadate(final RoseItem item){
+        if(item.getSellIn() >= 0){
+            increaseQualityBy(item, 1);
+        } else {
+            decreaseQualityBy(item, 2);
+        }
+    }
+
+    public void backstageUpdate(final RoseItem item){
+        if(item.getSellIn() <= 0){
+            item.setQuality(0);
+        } else if(item.getSellIn() <= 3){
+            increaseQualityBy(item, 3);
+        } else if(item.getSellIn() <= 10){
+            increaseQualityBy(item, 2);
+        } else {
+            increaseQualityBy(item, 1);
+        }
+    }
+
+    public void othersUpdate(final RoseItem item){
+        if(item.getName().contains(item.CONJURED) || item.getSellIn() <= 0){
+            decreaseQualityBy(item, 2);
+        } else {
+            decreaseQualityBy(item, 1);
+        }
     }
 
     private void increaseQualityBy(final RoseItem item, final int value){

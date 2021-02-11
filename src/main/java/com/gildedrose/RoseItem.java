@@ -5,7 +5,7 @@ public class RoseItem extends Item {
     public static String SULFURA = "Sulfuras";
     public static String AGED_BRANDIE = "Aged Brie";
     public static String BACKSTAGE_PASSES = "Backstage passes";
-    public static String CONJURED = "Backstage passes";
+    public static String CONJURED = "conjured";
 
     public RoseItem(String name, int sellIn, int quality){
         super(name, sellIn, quality);
