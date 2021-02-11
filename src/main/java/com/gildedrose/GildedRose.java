@@ -13,29 +13,39 @@ class GildedRose {
 
             if(item.getName().contains(item.BACKSTAGE_PASSES)){
                 if(item.getSellIn() <= 3){
-                    item.setQuality(item.getQuality() +3);
+                    increaseQualityBy(item, 3);
                 } else if(item.getSellIn() <= 10){
-                    item.setQuality(item.getQuality() +2);
+                    increaseQualityBy(item, 2);
                 } else if(item.getSellIn() == 0){
                     item.setQuality(0);
                 } else {
-                    item.setQuality(item.getQuality() +1);
+                    increaseQualityBy(item, 1);
                 }
-            } else if(item.getName().contains(item.AGED_BRANDIE) && item.getSellIn() >= 0) {
+            } else if(item.getName().contains(item.AGED_BRANDIE)) {
                 if(item.getSellIn() >= 0){
-                    item.setQuality(item.getQuality() +1);
+                    increaseQualityBy(item, 1);
                 } else {
-                    item.setQuality(item.getQuality() /2);
+                    decreaseQualityBy(item, -2);
                 }
             } else {
-                if(item.getSellIn() == 0){
-                    item.setQuality(item.getQuality() /2);
+                if(item.getName().contains(item.CONJURED) || item.getSellIn() <= 0){
+                    decreaseQualityBy(item, -2);
                 } else {
-                    item.setQuality(item.getQuality() -1);
+                    decreaseQualityBy(item, 1);
                 }
             }
 
-            item.sellingPeriode();
+            item.decreasePeriode(1);
         }
+
     }
+
+    private void increaseQualityBy(final RoseItem item, final int value){
+        item.setQuality(item.getQuality() +value);
+    }
+
+    private void decreaseQualityBy(final RoseItem item, final int value){
+        item.setQuality(item.getQuality() -value);
+    }
+
 }

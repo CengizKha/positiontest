@@ -5,6 +5,7 @@ public class RoseItem extends Item {
     public static String SULFURA = "Sulfuras";
     public static String AGED_BRANDIE = "Aged Brie";
     public static String BACKSTAGE_PASSES = "Backstage passes";
+    public static String CONJURED = "Backstage passes";
 
     public RoseItem(String name, int sellIn, int quality){
         super(name, sellIn, quality);
@@ -13,10 +14,8 @@ public class RoseItem extends Item {
         }
     }
 
-    public void sellingPeriode(){
-        if(!getName().contains(SULFURA)){
-            setSellIn(getSellIn() -1);
-        }
+    public void decreasePeriode(int periode){
+        setSellIn(getSellIn() -periode);
     }
 
     public String getName(){
@@ -27,7 +26,9 @@ public class RoseItem extends Item {
         return sellIn;
     }
     public void setSellIn(int sellIn){
-        this.sellIn = sellIn;
+        if(!getName().contains(SULFURA)){
+            this.sellIn = sellIn;
+        }
     }
 
     public int getQuality(){
