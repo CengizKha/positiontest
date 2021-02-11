@@ -125,9 +125,9 @@ class GildedRoseTest {
     }
 
     @Test
-    void updateQualityTest(){
+    void updateQualityTestV1(){
         GildedRose app = new GildedRose(items);
-        app.updateQuality();
+        app.updateQualityV1();
 
         // ageBried
         assertEquals(11, app.items[0].getQuality());
@@ -140,6 +140,21 @@ class GildedRoseTest {
         assertEquals(12, app.items[8].getQuality());
         assertEquals(8, app.items[9].getQuality());
         assertEquals(8, app.items[10].getQuality());
+        //conjured
+        assertEquals(8, app.items[9].getQuality());
+        //others
+        assertEquals(8, app.items[10].getQuality());
+        assertEquals(8, app.items[11].getQuality());
+
+        // sulfura
+        assertEquals(RoseItem.SULFURA, app.items[13].getName());
+    }
+
+    @Test
+    void updateQualityTestV2(){
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+
         //conjured
         assertEquals(8, app.items[9].getQuality());
         //others

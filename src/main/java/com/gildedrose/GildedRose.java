@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.Arrays;
+
 class GildedRose {
 
     protected RoseItem[] items;
@@ -8,7 +10,7 @@ class GildedRose {
         this.items = items;
     }
 
-    public void updateQuality() {
+    public void updateQualityV1() {
         for (RoseItem item : items) {
 
             item.decreasePeriode(1);
@@ -23,6 +25,17 @@ class GildedRose {
 
         }
 
+    }
+
+    public void updateQuality(){
+        Arrays.stream(items).forEach(roseItem -> {
+            if(roseItem.getName().contains(RoseItem.BACKSTAGE_PASSES))
+                backstageUpdate(roseItem);
+            else if(roseItem.getName().contains(RoseItem.AGED_BRANDIE))
+                agedBendieUpadate(roseItem);
+            else
+                othersUpdate(roseItem);
+        });
     }
 
     public void agedBendieUpadate(final RoseItem item){
